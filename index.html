@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--link  bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="d-flex h-100">
+        <div class="col-9 h-100 overflow-y-auto ">
+            <div class="col-12 p-3 border-bottom">
+                <button class="btn btn-danger">Reset Bill</button>
+                <button class="btn btn-danger">Print Bill</button>
+            </div>
+            <div class="col-12 p-3">
+                <table class="table table-bordered table-dark table-hover ">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Item Name</th>
+                            <th>Item Price</th>
+                            <th>Item Qty</th>
+                            <th>Item Total</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="5">Bill Total</th>
+                            <th><span id="totalSpan"></span>0</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <div id="productesDiv" class="col-3 shadow h-100 overflow-y-auto border-start ">
+            <div class="col-12 p-3 border-bottom">
+                <button class="btn btn-primary" onclick="showmyModal()">+ Add New Phone</button>
+            </div>
+            <div class="col-12 p-2">
+                <!-- <div class="col-12 p-3 bg-white shadow rounded border">
+                    <h1>iPhone x</h1>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="mb-0">Price : 400 $</p>
+                        <button class="btn btn-success">Add To Cart</button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="myModal" onclick="clossmodal()">
+        <div class="col-4 rounded shadow border p-3 d-flex flex-column gap-3 bg-white animate__animated animate__fadeInDownBig"
+            onclick=" event.stopPropagation()">
+            <h3>Pleas Enter New Name Phone</h3>
+            <input type="number" class="rounded shadow border form-control" placeholder="id for phone" id="idforphone">
+            <input type="text" class="rounded shadow border form-control" placeholder="Name phone" id="Namephone">
+            <input class="rounded shadow border form-control" type="number" placeholder="Pleas Enter Price"
+                id="Pricephone">
+            <div class="col-12 d-flex align align-items-center justify-content-end gap-3">
+                <button class="btn btn-danger col-3" onclick="clossmodal()">x Close</button>
+                <button class="btn btn-success col-3" id="addphone"> + Add</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+    <script src="./index.js"></script>
+</body>
+
+</html>
