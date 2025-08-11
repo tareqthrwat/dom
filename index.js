@@ -1,10 +1,12 @@
-let products = [
-    { id: 1, Name: 'iPhone x', Price: 400 },
-    { id: 2, Name: 'iPhone 11', Price: 450 },
-    { id: 3, Name: 'iPhone 12', Price: 500 },
-    { id: 4, Name: 'iPhone 13', Price: 600 },
-    { id: 5, Name: 'iPhone 14', Price: 750 },
-];
+
+let jesnproducts=JSON.stringify(products);
+let jesncart=JSON.stringify(cart);
+localStorage.setItem('products' , jesnproducts);
+localStorage.setItem('cart' , jesncart);
+let products =JSON.parse(localStorage.getItem(products)) 
+let cart =JSON.parse(localStorage.getItem(cart)) 
+
+
 let productesDiv = document.querySelector('#productesDiv');
 let table = document.querySelector('table tbody');
 let TotalSpan = document.querySelector('#totalSpan');
@@ -19,14 +21,11 @@ let showProductes = () => {
                         <button class="btn btn-success" onclick="addphoneCart(${index})" >Add To Cart</button>
                     </div>
                 </div>
-            </div></div>
+            </div>
 `
     })
 };
-let cart = [
-    // { id: 1, Name: 'iPhone x', Price: 400, Qty: 3 },
-    // { id: 2, Name: 'iPhone 11', Price: 450, Qty: 5 },
-]
+
 let getTotle = () => {
     let finle = 0;
     cart.forEach((el) => {
@@ -35,6 +34,7 @@ let getTotle = () => {
     TotalSpan.innerText = finle;
 };
 let showCart = () => {
+    table.innerHTML = ``
     cart.forEach((el, index) => {
         table.innerHTML += `
                     <tr>
@@ -43,13 +43,13 @@ let showCart = () => {
                         <td> ${el.Price} $</td>
                         <td>
                             <div class="d-flex align-items-center justify-content-center gap-3">
-                                <button class= " btn btn-danger">-</button>
+                                <button onclick=removeQty(${index}) class= " btn btn-danger">-</button>
                                 <p class="mb-0"> ${el.Qty} </p>
-                                <button class="btn btn-success">+</button>
+                                <button onclick="addqty(${index})"  class="btn btn-success">+</button>
                             </div>
                         </td>
                         <td> ${el.Qty * el.Price} $</td>
-                        <td> <button class="btn btn-danger">Del</button></td>
+                        <td> <button onclick="deleteItem(${index})" class="btn btn-danger">Del</button></td>
                     </tr>
     `
     })
@@ -92,9 +92,33 @@ addphone.addEventListener('click', () => {
 
 // _______________add to cart ________________
 let addphoneCart = (seletedIndex) => {
-    table.innerHTML = ``
-    products.Name=products[seletedIndex].Name
-    products.Price=products[seletedIndex].Price
-    cart.push(newobj)
+    let newobj = {
+        id: products[seletedIndex].id, Name: products[seletedIndex].Name, Price: products[seletedIndex].Price, Qty: +1
+    }
+    
+    cart.push(newobj);
     showCart()
+};
+
+// -------------add qty -------------------
+let addqty = (seletedIndex) => {
+    cart[seletedIndex].Qty++;
+    showCart()
+
 }
+// -------------remove Qty---------------
+let removeQty = (seletedIndex) => {
+    if (cart[seletedIndex].Qty > 1) {
+        cart[seletedIndex].Qty--;
+    } else {
+        cart.splice(seletedIndex, 1);
+    }
+    showCart();
+};
+// ----------deleteItem------------
+let deleteItem = (index) => {
+    cart.splice(index, 1);
+    showCart();
+};
+
+
