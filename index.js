@@ -1,11 +1,13 @@
 
-let jesnproducts=JSON.stringify(products);
-let jesncart=JSON.stringify(cart);
-localStorage.setItem('products' , jesnproducts);
-localStorage.setItem('cart' , jesncart);
-let products =JSON.parse(localStorage.getItem(products)) 
-let cart =JSON.parse(localStorage.getItem(cart)) 
+let jesnproducts = JSON.stringify('products');
+let jesncart = JSON.stringify('cart');
 
+let products = JSON.parse(localStorage.getItem('products')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let saveDataToLocalStora = () => {
+    localStorage.setItem('products', JSON.stringify(products));
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
 
 let productesDiv = document.querySelector('#productesDiv');
 let table = document.querySelector('table tbody');
@@ -24,6 +26,7 @@ let showProductes = () => {
             </div>
 `
     })
+    saveDataToLocalStora()
 };
 
 let getTotle = () => {
@@ -53,7 +56,8 @@ let showCart = () => {
                     </tr>
     `
     })
-    getTotle()
+    saveDataToLocalStora()
+    getTotle();
 };
 showCart()
 showProductes();
@@ -87,16 +91,26 @@ let addnewphone = () => {
 addphone.addEventListener('click', () => {
     addnewphone();
     clossmodal();
+    saveDataToLocalStora()
 });
 
 
 // _______________add to cart ________________
 let addphoneCart = (seletedIndex) => {
-    let newobj = {
-        id: products[seletedIndex].id, Name: products[seletedIndex].Name, Price: products[seletedIndex].Price, Qty: +1
+    let product = cart.find((el)=>{
+        return el.id === products[seletedIndex].id;
+    })
+    if (product) {
+        cart[seletedIndex].Qty++;
     }
+    else {
+        let newobj = {
+            id: products[seletedIndex].id, Name: products[seletedIndex].Name, Price: products[seletedIndex].Price, Qty: +1
+        }
+        cart.push(newobj);
+    }
+
     
-    cart.push(newobj);
     showCart()
 };
 
